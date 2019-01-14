@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
+//@Data
 @Entity
 @Table(name = "books")
 public class Book {
@@ -20,10 +20,22 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String isbn, String author) {
-        this.title = title;
-        this.isbn = isbn;
-        this.author = author;
+//    public Book(String title, String isbn, String author) {
+//        this.title = title;
+//        this.isbn = isbn;
+//        this.author = author;
+//    }
+
+    @ManyToOne
+    @JoinColumn(name = "fk_category")
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Long getId() {

@@ -43,4 +43,16 @@ public class BookController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND); //404
     }
+
+    @DeleteMapping("books/{isbn}")
+    public ResponseEntity<Book> deleteBook(@PathVariable String isbn){
+
+        Optional<Book> optionalBook = bookRepository.findByIsbn(isbn);
+
+        if (optionalBook.isPresent()){
+            bookRepository.delete(optionalBook.get());
+            return new ResponseEntity<>(HttpStatus.OK); //200
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND); //404
+    }
 }
